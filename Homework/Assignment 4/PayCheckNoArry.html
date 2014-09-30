@@ -1,0 +1,75 @@
+<script type="text/javascript">
+	/*
+		File: PayCheck W/O Dimentional Array
+		Author: Kory Brown
+		
+	*/
+</script>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>PaycheckNoArrays</title>
+</head>
+
+<body>
+<script type="text/javascript">
+	//Declare and initialize variables
+	var payRate=10;//($'s/hr)
+	var doubleTime = 20;
+	var tripleTime = 40;
+	var grossPay = 0;
+	var taxes = .10;
+	var netPay = 0;
+	var hours = 72;
+	var str="";
+	
+	
+	//Output the inputs
+	document.write("<p>Hours worked =  "+hours  +" (hrs)</p>");
+	document.write("<p>Pay Rate = $"+payRate+" per hour</p>");
+</script>
+
+<table width="200" border="1">
+  <tr>
+    <th>Hours</th>
+    <th>PayRate</th>
+    <th>GrossPay</th>
+    <th>Taxes</th>
+    <th>NetPay</th>
+  </tr>
+  <script type = "text/javascript">
+  for (var hour = 1; hour <= hours; hour++)
+  {
+ 	 str+="<tr>";
+   	 str+=("<td>"+hour+"</td>");
+	 
+	 if (hour >= doubleTime && hour < tripleTime)
+	 {
+		 payRate = 20;
+		 grossPay = hour*payRate;
+	 }
+	 else if (hour >= tripleTime)
+	 {
+		 payRate = 30;
+		 grossPay = hour*payRate;
+	 }
+	 else
+	 	grossPay = hour*payRate;
+		
+	str+=("<td>"+payRate+"</td>");	
+	str+=("<td>$"+grossPay+"</td>");
+	str+=("<td>-$"+(grossPay*taxes)+"</td>");
+	
+	netPay = grossPay*taxes;
+	netPay = grossPay - netPay;
+	netPay = netPay.toFixed(2);
+	
+	str+=("<td>$"+netPay+"</td>");
+  	str+= "</tr>";
+  }
+ 	document.write(str);
+	</script>
+</table>
+</body>
+</html>
