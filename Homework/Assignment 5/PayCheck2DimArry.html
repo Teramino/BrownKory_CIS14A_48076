@@ -1,0 +1,118 @@
+<script type="text/javascript">
+	/*
+		File: PayCheck 1-Dimentional Array
+		Author: Kory Brown
+		
+	*/
+</script>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>PayCheck1DimArray</title>
+</head>
+
+<body>
+<script type="text/javascript">
+	//Declare and initialize variables
+	var pay=10; //($'s/hr)
+	var tax = .10;
+	var doubleTime = 20;
+	var tripleTime = 40;
+	var table = [];
+	var grossPay =[];
+	var payRate = [];
+	var netPay = [];
+	var taxes = [];
+	var hours = 72;
+	var str="";
+	
+	// Initialize array
+	table[0] = [];
+	table[0][0] = 0;	
+	payRate[0] = 0;
+	grossPay[0] = 0;
+	netPay[0] = 0;
+	taxes[0] = 0;
+	for (var row = 1; row <= hours; row++)
+		table[row] = [];
+	
+	// Populate array
+	for(var hour = 1; hour <=hours; hour++)
+	{
+		 if (hour >= doubleTime && hour < tripleTime)
+	 	{
+			payRate[hour] = pay*2;
+		   grossPay[hour] = hour*payRate[hour];
+		   taxes[hour] = grossPay[hour]*tax;
+		}
+	 	else if (hour >= tripleTime)
+	 	{
+			payRate[hour] = pay*3;
+			grossPay[hour] = hour*payRate[hour];
+			taxes[hour] = grossPay[hour]*tax;
+	 	}
+	 	else
+		{
+			payRate[hour] = pay;
+		  	grossPay[hour] = hour*payRate[hour];
+			taxes[hour] = grossPay[hour]*tax;
+		}
+		
+		 netPay[hour] = grossPay[hour] - taxes[hour];
+		 netPay[hour] = netPay[hour].toFixed(2);	  
+	}
+	
+	for (var row = 1; row < table.length; row++)
+	{
+		for (var col = 0; col < 4; col++)
+		{
+			if (col==0)
+				table[row][col] = payRate[row];
+			else if(col==1)
+				table[row][col] = grossPay[row];
+			else if(col==2)
+				table[row][col] = taxes[row];
+			else if(col==3)
+				table[row][col] = netPay[row];
+		}
+		
+	}
+	
+	//Output the inputs
+	document.write("<p>Hours worked =  "+hours  +" (hrs)</p>");
+	document.write("<p>Pay Rate = $"+pay+" per hour</p>");
+</script>
+
+
+<table width="200" border="1">
+  <tr>
+    <th>Hours</th>
+    <th>PayRate</th>
+    <th>GrossPay</th>
+    <th>Taxes</th>
+    <th>NetPay</th>
+  </tr>
+  <script type = "text/javascript">
+  for (var row = 1; row <= hours; row++)
+  {
+	   str+="<tr>";
+	   str+=("<td>"+row+"</td>");
+	  for(var col = 0; col < 4; col++)
+	  {
+		 if (col==0)
+		 	str+=("<td>"+table[row][col]+"</td>"); // payRate
+		 else if (col==1)
+		 	str+=("<td>$"+table[row][col]+"</td>"); // grossPay
+		else if (col==2)
+			str+=("<td>-$"+table[row][col]+"</td>"); // taxes
+		else if (col==3)
+		 	str+=("<td>$"+table[row][col]+"</td>"); // netPay
+	  }
+  	 str+= "</tr>";
+  }
+ 	document.write(str);
+	</script>
+</table>
+</body>
+</html>
